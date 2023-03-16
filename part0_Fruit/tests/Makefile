@@ -3,7 +3,7 @@ G++				=	g++
 TEST_SRC_PATH	=	./test_src
 TEST_INC_PATH	=	./test_include
 TEST_BIN_PATH	=	./test_bin
-TEST_SRC		=	$(TEST_SRC_PATH)/test_Fruit.cpp 
+TEST_SRC		=	$(TEST_SRC_PATH)/test_Lemon.cpp 
 
 NAME			=	test_Fruit
 #############################################
