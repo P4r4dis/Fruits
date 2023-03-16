@@ -14,7 +14,7 @@ INCFLAGS	+=	-I $(INC_PATH)
 CPPFLAGS	+= -Wall -Wextra -Werror $(INCFLAGS)#-W -std=c++1z
 
 
-SRCS		=	$(SRC_PATH)/Fruit.cpp \
+SRCS		=	$(SRC_PATH)/Lemon.cpp \
 				$(BIN_PATH)/main_Fruit.cpp
 
 SRC_TEST	=	$(TST_PATH)/$(NAME)_test.cpp
