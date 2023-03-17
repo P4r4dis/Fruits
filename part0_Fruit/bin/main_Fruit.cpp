@@ -1,6 +1,7 @@
 #include "../include/Lemon.hpp"
 #include "../include/Banana.hpp"
 #include "../include/Fruit.hpp"
+#include "../include/FruitBox.hpp"
 
 int main()
 {
@@ -15,5 +16,12 @@ int main()
     Fruit &f = l;
     std::cout << f.getVitamins() << std::endl;
     std::cout << f.getName() << std::endl;
+
+    FruitBox    fbox(3);
+
+    std::cout << "Size Box: " << fbox.getSize() << std::endl;
+    std::cout << "Number Fruit inside the Box: " << fbox.nbFruit() << std::endl;
+    std::cout << "Head of the linked list: " << fbox.head() << std::endl;
+
     return 0;
 }
