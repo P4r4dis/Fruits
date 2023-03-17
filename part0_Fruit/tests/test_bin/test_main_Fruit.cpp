@@ -5,7 +5,7 @@
 #include <criterion/parameterized.h>
 #include <signal.h>
 
-#include "../test_include/test_Fruit.hpp"
+// #include "../test_include/test_Fruit.hpp"
 #include "../test_include/test_Lemon.hpp"
 #include "../test_include/test_Banana.hpp"
 
@@ -54,4 +54,22 @@ Test(Banana, test_Banana_class, .init = redirect_all_stdout)//, .signal = SIGPIP
     cr_assert_stdout_eq_str(
         "5\n"
         "banana\n");
+}
+
+Test(Fruit, test_Fruit_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+{
+    Lemon   l;
+    // Banana  b;
+    
+    // std::cout << l.getVitamins() << std::endl;
+    // std::cout << b.getVitamins() << std::endl;
+    // std::cout << l.getName() << std::endl;
+    // std::cout << b.getName() << std::endl;
+
+    Fruit &f = l;
+    std::cout << f.getVitamins() << std::endl;
+    std::cout << f.getName() << std::endl;
+    cr_assert_stdout_eq_str(
+        "3\n"
+        "lemon\n");
 }

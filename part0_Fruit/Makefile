@@ -16,6 +16,7 @@ CPPFLAGS	+= -Wall -Wextra -Werror $(INCFLAGS)#-W -std=c++1z
 
 SRCS		=	$(SRC_PATH)/Lemon.cpp \
 				$(SRC_PATH)/Banana.cpp \
+				$(SRC_PATH)/Fruit.cpp \
 				$(BIN_PATH)/main_Fruit.cpp
 
 SRC_TEST	=	$(TST_PATH)/$(NAME)_test.cpp
