@@ -1,21 +1,14 @@
 #ifndef                 __LEMON__
     #define             __LEMON__
 
-#include <string>
+#include "Fruit.hpp"
 
-class                   Lemon
+class                   Lemon : public Fruit
 {
     public:
         Lemon(void);
         ~Lemon(void);
-
-        std::string     getName(void) const;
-        int             getVitamins(void) const;
-
-        void            setVitamins(int Vitamins);
     protected:
     private:
-        std::string     _name;
-        int             _vitamins;
 };
 #endif //               !__LEMON__

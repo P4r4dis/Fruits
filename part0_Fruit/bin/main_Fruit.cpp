@@ -1,7 +1,6 @@
 #include "../include/Lemon.hpp"
 #include "../include/Banana.hpp"
-
-#include <iostream>
+#include "../include/Fruit.hpp"
 
 int main()
 {
@@ -12,5 +11,9 @@ int main()
     std::cout << b.getVitamins() << std::endl;
     std::cout << l.getName() << std::endl;
     std::cout << b.getName() << std::endl;
+
+    Fruit &f = l;
+    std::cout << f.getVitamins() << std::endl;
+    std::cout << f.getName() << std::endl;
     return 0;
 }
