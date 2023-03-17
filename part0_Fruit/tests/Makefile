@@ -5,7 +5,8 @@ TEST_INC_PATH	=	./test_include
 TEST_BIN_PATH	=	./test_bin
 TEST_SRC		=	$(TEST_SRC_PATH)/test_Lemon.cpp \
 					$(TEST_SRC_PATH)/test_Banana.cpp \
-					$(TEST_SRC_PATH)/test_Fruit.cpp
+					$(TEST_SRC_PATH)/test_Fruit.cpp \
+					$(TEST_SRC_PATH)/test_FruitBox.cpp
 					
 NAME			=	test_Fruit
 #############################################

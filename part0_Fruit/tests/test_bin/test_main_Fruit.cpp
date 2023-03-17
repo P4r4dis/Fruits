@@ -5,9 +5,9 @@
 #include <criterion/parameterized.h>
 #include <signal.h>
 
-// #include "../test_include/test_Fruit.hpp"
 #include "../test_include/test_Lemon.hpp"
 #include "../test_include/test_Banana.hpp"
+#include "../test_include/test_FruitBox.hpp"
 
 
 void    redirect_all_stdout(void)
@@ -59,17 +59,40 @@ Test(Banana, test_Banana_class, .init = redirect_all_stdout)//, .signal = SIGPIP
 Test(Fruit, test_Fruit_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
 {
     Lemon   l;
-    // Banana  b;
+    Fruit &f = l;
+
+    std::cout << f.getVitamins() << std::endl;
+    std::cout << f.getName() << std::endl;
+    cr_assert_stdout_eq_str(
+        "3\n"
+        "lemon\n");
+}
+
+Test(FruitBox, test_FruitBox_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+{
+    Lemon   l;
+    Banana  b;
     
-    // std::cout << l.getVitamins() << std::endl;
-    // std::cout << b.getVitamins() << std::endl;
-    // std::cout << l.getName() << std::endl;
-    // std::cout << b.getName() << std::endl;
+    std::cout << l.getVitamins() << std::endl;
+    std::cout << b.getVitamins() << std::endl;
+    std::cout << l.getName() << std::endl;
+    std::cout << b.getName() << std::endl;
 
     Fruit &f = l;
     std::cout << f.getVitamins() << std::endl;
     std::cout << f.getName() << std::endl;
+
+    FruitBox    fbox(3);
+
+    cr_assert(fbox.getSize() == 3);
+    cr_assert(fbox.nbFruit() == 0);
+    cr_assert(fbox.head() == nullptr);
+
     cr_assert_stdout_eq_str(
+        "3\n"
+        "5\n"
+        "lemon\n"
+        "banana\n"
         "3\n"
         "lemon\n");
 }
