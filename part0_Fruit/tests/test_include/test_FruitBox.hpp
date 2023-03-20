@@ -18,6 +18,7 @@ class                       FruitBox
 
         int                 getSize(void) const;
 
+        void                setHead(FruitNode *f);
 
     protected:
     private:

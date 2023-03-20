@@ -4,6 +4,9 @@
 
 struct                  FruitNode
 {
+        FruitNode(Fruit *f) : fruit(f), next(nullptr) {}
+        ~FruitNode() { delete next; }
+        
         Fruit           *fruit;
         FruitNode       *next;
 };

@@ -96,3 +96,55 @@ Test(FruitBox, test_FruitBox_class, .init = redirect_all_stdout)//, .signal = SI
         "3\n"
         "lemon\n");
 }
+
+Test(FruitBox, test_FruitBox_putFruit)//, .signal = SIGSEGV, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+{
+    Lemon   l;
+    Banana  b;
+    Banana  c;
+    Lemon   d;
+
+    
+    std::cout << l.getVitamins() << std::endl;
+    std::cout << b.getVitamins() << std::endl;
+    std::cout << l.getName() << std::endl;
+    std::cout << b.getName() << std::endl;
+
+    Fruit &f = l;
+    std::cout << f.getVitamins() << std::endl;
+    std::cout << f.getName() << std::endl;
+
+    FruitBox    fbox(3);
+
+    cr_assert(fbox.getSize() == 3);
+    cr_assert(fbox.nbFruit() == 0);
+    cr_assert(fbox.head() == nullptr);
+    cr_assert(fbox.putFruit(&l) == true);
+    cr_assert(fbox.nbFruit() == 1);
+    cr_assert(fbox.putFruit(&b) == true);
+    cr_assert(fbox.nbFruit() == 2);
+    cr_assert(fbox.putFruit(&c) == true);
+    cr_assert(fbox.nbFruit() == 3);
+    cr_assert(fbox.putFruit(&d) == false);
+    cr_assert(fbox.nbFruit() == 3);
+    cr_assert(fbox.putFruit(&f) == false);
+    cr_assert(fbox.nbFruit() == 3);
+    cr_assert(fbox.head() != nullptr);
+
+    std::cout << "Fruit in the Box : " << std::endl;
+    while (fbox.head() != nullptr)
+    {
+        std::cout << fbox.head()->fruit->getName() << std::endl;
+        fbox.setHead(fbox.head()->next);
+    }
+
+// fbox.display();
+    // fbox.~FruitBox();
+    // cr_assert_stdout_eq_str(
+    //     "3\n"
+    //     "5\n"
+    //     "lemon\n"
+    //     "banana\n"
+    //     "3\n"
+    //     "lemon\n");
+}
