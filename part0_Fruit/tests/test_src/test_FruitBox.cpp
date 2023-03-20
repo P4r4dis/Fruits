@@ -101,3 +101,17 @@ Fruit                   *FruitBox::pickFruit(void)
         return fruit;
     }
 }
+
+void                    FruitBox::printList(void) {
+      FruitNode* temp = m_head;
+
+      if(temp != NULL) {
+        std::cout<<"The list contains: " << std::endl;;
+        while(temp != NULL) {
+          std::cout<<temp->fruit->getName()<< std::endl;;
+          temp = temp->next;
+        }
+      } else {
+        std::cout<<"The list is empty.\n";
+      }
+}    

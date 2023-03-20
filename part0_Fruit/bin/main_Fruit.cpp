@@ -25,14 +25,24 @@ int main()
 
     fbox.putFruit(&l);
     fbox.putFruit(&b);
-    std::cout << "Fruit in the Box : " << std::endl;
-    while (fbox.head() != nullptr)
-    {
-        std::cout << fbox.head()->fruit->getName() << std::endl;
-        fbox.setHead(fbox.head()->next);
-    }
+    fbox.printList();
 
-    std::cout << "Size Box: " << fbox.getSize() << std::endl;
-    std::cout << "Number Fruit inside the Box: " << fbox.nbFruit() << std::endl;
+    fbox.pickFruit();
+    fbox.printList();
+    fbox.pickFruit();
+    fbox.printList();
+
+
+//     std::cout << "Fruit in the Box : " << std::endl;
+//    while (node != nullptr)
+//     {
+//         std::cout << fbox.head()->fruit->getName() << std::endl;
+//         node = node->next;
+//     }
+    // while (fbox.head() != nullptr)
+    // {
+    //     std::cout << fbox.head()->fruit->getName() << std::endl;
+    //     fbox.setHead(fbox.head()->next);
+    // }
     return 0;
 }

@@ -76,3 +76,42 @@ bool                    FruitBox::putFruit(Fruit *f)
     // 8: return true;
     return true;
 }
+
+Fruit                   *FruitBox::pickFruit(void)
+{
+    if (m_nbFruit == 0)
+        return nullptr;
+    else
+    {
+        // Get the first node in the list
+        FruitNode   *currentFruitNode = m_head;
+
+        // Get the Fruit from the first 
+        Fruit       *fruit = currentFruitNode->fruit;
+
+        // Remove the first node from the list
+        m_head = currentFruitNode->next;
+        currentFruitNode = nullptr;
+        delete currentFruitNode;
+
+        // Decrement the number of Fruits in the box
+        m_nbFruit--;
+
+        // Return the picked Fruit
+        return fruit;
+    }
+}
+
+void                    FruitBox::printList(void) {
+      FruitNode* temp = m_head;
+
+      if(temp != NULL) {
+        std::cout<<"The list contains: " << std::endl;;
+        while(temp != NULL) {
+          std::cout<<temp->fruit->getName()<< std::endl;;
+          temp = temp->next;
+        }
+      } else {
+        std::cout<<"The list is empty.\n";
+      }
+}    
