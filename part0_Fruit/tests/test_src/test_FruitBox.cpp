@@ -75,5 +75,4 @@ bool                    FruitBox::putFruit(Fruit *f)
 
     // 8: return true;
     return true;
-
 }

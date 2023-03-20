@@ -23,5 +23,16 @@ int main()
     std::cout << "Number Fruit inside the Box: " << fbox.nbFruit() << std::endl;
     std::cout << "Head of the linked list: " << fbox.head() << std::endl;
 
+    fbox.putFruit(&l);
+    fbox.putFruit(&b);
+    std::cout << "Fruit in the Box : " << std::endl;
+    while (fbox.head() != nullptr)
+    {
+        std::cout << fbox.head()->fruit->getName() << std::endl;
+        fbox.setHead(fbox.head()->next);
+    }
+
+    std::cout << "Size Box: " << fbox.getSize() << std::endl;
+    std::cout << "Number Fruit inside the Box: " << fbox.nbFruit() << std::endl;
     return 0;
 }
