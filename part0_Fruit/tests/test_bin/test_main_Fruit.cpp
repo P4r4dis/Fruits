@@ -97,7 +97,7 @@ Test(FruitBox, test_FruitBox_class, .init = redirect_all_stdout)//, .signal = SI
         "lemon\n");
 }
 
-Test(FruitBox, test_FruitBox_putFruit)//, .signal = SIGSEGV, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(FruitBox, test_FruitBox_putFruit, .init = redirect_all_stdout)//, .signal = SIGSEGV, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
 {
     Lemon   l;
     Banana  b;
@@ -137,6 +137,50 @@ Test(FruitBox, test_FruitBox_putFruit)//, .signal = SIGSEGV, .init = redirect_al
         std::cout << fbox.head()->fruit->getName() << std::endl;
         fbox.setHead(fbox.head()->next);
     }
+
+// fbox.display();
+    // fbox.~FruitBox();
+    // cr_assert_stdout_eq_str(
+    //     "3\n"
+    //     "5\n"
+    //     "lemon\n"
+    //     "banana\n"
+    //     "3\n"
+    //     "lemon\n");
+}
+
+
+Test(FruitBox, test_FruitBox_pickFruit)//, .signal = SIGSEGV)//, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+{
+    Lemon   l;
+    Banana  b;
+    Banana  c;
+    Lemon   d;
+
+    
+    std::cout << l.getVitamins() << std::endl;
+    std::cout << b.getVitamins() << std::endl;
+    std::cout << l.getName() << std::endl;
+    std::cout << b.getName() << std::endl;
+
+    Fruit &f = l;
+    std::cout << f.getVitamins() << std::endl;
+    std::cout << f.getName() << std::endl;
+
+    FruitBox    fbox(3);
+
+    fbox.putFruit(&l);
+    fbox.putFruit(&b);
+
+    fbox.pickFruit();
+    cr_assert(fbox.head()->fruit == &b);
+    // std::cout << "Fruit in the Box : " << std::endl;
+
+    // while (fbox.head() != nullptr)
+    // {
+    //     std::cout << fbox.head()->fruit->getName() << std::endl;
+    //     fbox.setHead(fbox.head()->next);
+    // }
 
 // fbox.display();
     // fbox.~FruitBox();

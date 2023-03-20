@@ -76,3 +76,28 @@ bool                    FruitBox::putFruit(Fruit *f)
     // 8: return true;
     return true;
 }
+
+Fruit                   *FruitBox::pickFruit(void)
+{
+    if (m_nbFruit == 0)
+        return nullptr;
+    else
+    {
+        // Get the first node in the list
+        FruitNode   *currentFruitNode = m_head;
+
+        // Get the Fruit from the first 
+        Fruit       *fruit = currentFruitNode->fruit;
+
+        // Remove the first node from the list
+        m_head = currentFruitNode->next;
+        currentFruitNode = nullptr;
+        delete currentFruitNode;
+
+        // Decrement the number of Fruits in the box
+        m_nbFruit--;
+
+        // Return the picked Fruit
+        return fruit;
+    }
+}
