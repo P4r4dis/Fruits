@@ -48,11 +48,14 @@ RM						=	rm -rf
 clean					:
 							$(RM) $(OBJS)
 							@$(MAKE) $(CLEAN) -C $(PART0_TST_PATH)
+							@$(MAKE) $(CLEAN) -C $(PART1_TST_PATH)
 
 fclean					:	clean
 							$(RM) $(NAME) $(TEST_NAME)
 							@$(MAKE) $(FCLEAN) -C $(PART0_TST_PATH)
 							@$(MAKE) $(FCLEAN) -C $(PART0_PATH)
+							@$(MAKE) $(FCLEAN) -C $(PART1_TST_PATH)
+							@$(MAKE) $(FCLEAN) -C $(PART1_PATH)
 
 re						: 	fclean all
 
