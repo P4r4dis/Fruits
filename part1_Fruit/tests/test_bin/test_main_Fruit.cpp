@@ -7,6 +7,7 @@
 
 #include "../test_include/test_Lemon.hpp"
 #include "../test_include/test_Banana.hpp"
+#include "../test_include/test_Lime.hpp"
 #include "../test_include/test_FruitBox.hpp"
 
 
@@ -150,7 +151,7 @@ Test(FruitBox, test_FruitBox_putFruit, .init = redirect_all_stdout)//, .signal =
 }
 
 
-Test(FruitBox, test_FruitBox_pickFruit)//, .signal = SIGSEGV)//, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(FruitBox, test_FruitBox_pickFruit, .init = redirect_all_stdout)//, .signal = SIGSEGV)//)//, .signal = SIGPIPE, .init = redirect_all_stdout)
 {
     Lemon   l;
     Banana  b;
@@ -191,4 +192,24 @@ Test(FruitBox, test_FruitBox_pickFruit)//, .signal = SIGSEGV)//, .init = redirec
     //     "banana\n"
     //     "3\n"
     //     "lemon\n");
+}
+
+Test(Lime, test_Lime_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+{
+    Lime   lime;
+
+    cr_assert(lime.getVitamins() == 2);
+    lime.setVitamins(4);
+    cr_assert(lime.getVitamins() != 3);
+
+    cr_assert(lime.getName() == "lime");
+    lime.getName() = "G";
+    cr_assert(lime.getName() != "G");
+
+    lime.setVitamins(2);
+    std::cout << lime.getVitamins() << std::endl;
+    std::cout << lime.getName() << std::endl;
+    cr_assert_stdout_eq_str(
+        "2\n"
+        "lime\n");
 }
