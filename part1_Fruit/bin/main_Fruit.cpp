@@ -1,5 +1,6 @@
 #include "../include/Lemon.hpp"
 #include "../include/Banana.hpp"
+#include "../include/Lime.hpp"
 #include "../include/Fruit.hpp"
 #include "../include/FruitBox.hpp"
 
@@ -32,5 +33,9 @@ int main()
     fbox.pickFruit();
     fbox.printList();
 
+    Lime   lime;
+    std::cout << "new Lime Fruit:" << std::endl;
+    std::cout << lime.getVitamins() << std::endl;
+    std::cout << lime.getName() << std::endl;
     return 0;
 }
