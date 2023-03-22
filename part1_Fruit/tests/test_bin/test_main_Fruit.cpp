@@ -9,7 +9,7 @@
 #include "../test_include/test_Banana.hpp"
 #include "../test_include/test_Lime.hpp"
 #include "../test_include/test_FruitBox.hpp"
-
+#include "../test_include/test_LittleHand.hpp"
 
 void    redirect_all_stdout(void)
 {
@@ -212,4 +212,46 @@ Test(Lime, test_Lime_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .
     cr_assert_stdout_eq_str(
         "2\n"
         "lime\n");
+}
+
+Test(LittleHand, test_LittleHand_unsorted, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+{
+    Lime    lime, lime2, lime3, lime4;
+    Lemon   lemon, lemon2;
+    Banana  banana, banana2;
+    Fruit &f = lime;
+
+    FruitBox    unsorted(15);
+    FruitBox    LimeFruitBox(3);
+    FruitBox    LemonFruitBox(3);
+    FruitBox    BananaFruitBox(3);
+
+    unsorted.putFruit(&lime);
+    unsorted.putFruit(&lime2);
+    unsorted.putFruit(&lime3);
+    unsorted.putFruit(&lime4);
+
+    unsorted.putFruit(&lemon);
+    unsorted.putFruit(&lemon2);
+
+    unsorted.putFruit(&banana );
+    unsorted.putFruit(&banana2);
+
+    unsorted.putFruit(&f);
+
+
+    unsorted.printList();
+
+    LittleHand  littleHand;
+    littleHand.sortFruitBox(unsorted, LemonFruitBox, BananaFruitBox, LimeFruitBox);
+
+    std::cout << "display List after sort:" << std::endl;
+    std::cout << "unsorted list:" << std::endl;
+    unsorted.printList();
+    std::cout << "LemonFruitBox list:" << std::endl;
+    LemonFruitBox.printList();
+    std::cout << "BananaFruitBox list:" << std::endl;
+    BananaFruitBox.printList();
+    std::cout << "LimeFruitBox list:" << std::endl;
+    LimeFruitBox.printList();
 }
