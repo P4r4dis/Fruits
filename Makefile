@@ -22,6 +22,17 @@ PART1_SRC_TEST			=	$(PART1_TST_PATH)/$(NAME_FRUIT)_test.cpp
 TEST_NAME_FRUIT 		= 	test_$(NAME_FRUIT)
 
 ###############################################
+PART2_PATH 				= 	./part2_Fruit
+PART2_SRC_PATH			=	./part2_Fruit/src
+PART2_TST_PATH			=	./part2_Fruit/tests
+PART2_INC_PATH			=	./part2_Fruit/include
+NAME_FRUIT				=	Fruit
+PART2_SRC				=	$(PART1_SRC_PATH)/Fruit.cpp
+
+PART2_SRC_TEST			=	$(PART1_TST_PATH)/$(NAME_FRUIT)_test.cpp
+TEST_NAME_FRUIT 		= 	test_$(NAME_FRUIT)
+
+###############################################
 BIN_PATH				=	./bin
 
 NAME					=	Fruit
@@ -75,7 +86,17 @@ tests_run_part1			:	fclean
 							@$(MAKE) -C $(PART1_TST_PATH)
 							$(PART1_TST_PATH)/$(TEST_NAME_FRUIT)
 
+part2 					: 	fclean
+							@$(MAKE) -C $(PART2_PATH)
+							$(PART2_PATH)/$(NAME_FRUIT)
+
+tests_run_part2			:	fclean
+							@$(MAKE) -C $(PART2_TST_PATH)
+							$(PART2_TST_PATH)/$(TEST_NAME_FRUIT)
+
 tests_run				:	fclean
 							@$(MAKE) tests_run_part0
+							@$(MAKE) tests_run_part1
+							@$(MAKE) tests_run_part2
 
 .PHONY					: 	all clean fclean re part0 tests_run_part0 part1 tests_run_part1 tests_run
