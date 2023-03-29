@@ -20,6 +20,7 @@ SRCS		=	$(SRC_PATH)/Lemon.cpp \
 				$(SRC_PATH)/FruitBox.cpp \
 				$(SRC_PATH)/Lime.cpp \
 				$(SRC_PATH)/LittleHand.cpp \
+				$(SRC_PATH)/Coconut.cpp \
 				$(BIN_PATH)/main_Fruit.cpp
 
 SRC_TEST	=	$(TST_PATH)/$(NAME)_test.cpp

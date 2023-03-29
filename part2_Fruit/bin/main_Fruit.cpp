@@ -4,6 +4,7 @@
 #include "../include/Fruit.hpp"
 #include "../include/FruitBox.hpp"
 #include "../include/LittleHand.hpp"
+#include "../include/Coconut.hpp"
 
 int main()
 {
@@ -73,5 +74,10 @@ int main()
     BananaFruitBox.printList();
     std::cout << "LimeFruitBox list:" << std::endl;
     LimeFruitBox.printList();
+
+    Coconut     coconut;
+    std::cout << "new Coconut Fruit:" << std::endl;
+    std::cout << coconut.getVitamins() << std::endl;
+    std::cout << coconut.getName() << std::endl;
     return 0;
 }
