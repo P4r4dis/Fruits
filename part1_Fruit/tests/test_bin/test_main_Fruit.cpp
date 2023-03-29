@@ -17,7 +17,7 @@ void    redirect_all_stdout(void)
     cr_redirect_stderr();
 }
 
-Test(Lemon, test_Lemon_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(Lemon, test_Lemon_class, .init = redirect_all_stdout)
 {
     Lemon   l;
 
@@ -37,7 +37,7 @@ Test(Lemon, test_Lemon_class, .init = redirect_all_stdout)//, .signal = SIGPIPE,
         "lemon\n");
 }
 
-Test(Banana, test_Banana_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(Banana, test_Banana_class, .init = redirect_all_stdout)
 {
     Banana   b;
 
@@ -57,7 +57,7 @@ Test(Banana, test_Banana_class, .init = redirect_all_stdout)//, .signal = SIGPIP
         "banana\n");
 }
 
-Test(Fruit, test_Fruit_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(Fruit, test_Fruit_class, .init = redirect_all_stdout)
 {
     Lemon   l;
     Fruit &f = l;
@@ -69,7 +69,7 @@ Test(Fruit, test_Fruit_class, .init = redirect_all_stdout)//, .signal = SIGPIPE,
         "lemon\n");
 }
 
-Test(FruitBox, test_FruitBox_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(FruitBox, test_FruitBox_class, .init = redirect_all_stdout)
 {
     Lemon   l;
     Banana  b;
@@ -98,7 +98,7 @@ Test(FruitBox, test_FruitBox_class, .init = redirect_all_stdout)//, .signal = SI
         "lemon\n");
 }
 
-Test(FruitBox, test_FruitBox_putFruit, .init = redirect_all_stdout)//, .signal = SIGSEGV, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(FruitBox, test_FruitBox_putFruit, .init = redirect_all_stdout)
 {
     Lemon   l;
     Banana  b;
@@ -138,20 +138,10 @@ Test(FruitBox, test_FruitBox_putFruit, .init = redirect_all_stdout)//, .signal =
         std::cout << fbox.head()->fruit->getName() << std::endl;
         fbox.setHead(fbox.head()->next);
     }
-
-// fbox.display();
-    // fbox.~FruitBox();
-    // cr_assert_stdout_eq_str(
-    //     "3\n"
-    //     "5\n"
-    //     "lemon\n"
-    //     "banana\n"
-    //     "3\n"
-    //     "lemon\n");
 }
 
 
-Test(FruitBox, test_FruitBox_pickFruit, .init = redirect_all_stdout)//, .signal = SIGSEGV)//)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(FruitBox, test_FruitBox_pickFruit, .init = redirect_all_stdout)
 {
     Lemon   l;
     Banana  b;
@@ -170,31 +160,22 @@ Test(FruitBox, test_FruitBox_pickFruit, .init = redirect_all_stdout)//, .signal 
 
     FruitBox    fbox(3);
 
-    fbox.putFruit(&l);
-    fbox.putFruit(&b);
+    cr_assert(fbox.putFruit(&l) == true);
+    cr_assert(fbox.putFruit(&b) == true);
+    cr_assert(fbox.putFruit(&c) == true);
+    cr_assert(fbox.putFruit(&d) == false);
+    fbox.printList();
 
-    fbox.pickFruit();
-    cr_assert(fbox.head()->fruit == &b);
-    // std::cout << "Fruit in the Box : " << std::endl;
+    cr_assert(fbox.pickFruit() == &l);
+    cr_assert(fbox.pickFruit() == &b);
+    cr_assert(fbox.pickFruit() == &c);
+    cr_assert(fbox.pickFruit() == nullptr);
 
-    // while (fbox.head() != nullptr)
-    // {
-    //     std::cout << fbox.head()->fruit->getName() << std::endl;
-    //     fbox.setHead(fbox.head()->next);
-    // }
-
-// fbox.display();
-    // fbox.~FruitBox();
-    // cr_assert_stdout_eq_str(
-    //     "3\n"
-    //     "5\n"
-    //     "lemon\n"
-    //     "banana\n"
-    //     "3\n"
-    //     "lemon\n");
+    fbox.printList();
+    cr_assert(fbox.head() == nullptr);
 }
 
-Test(Lime, test_Lime_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(Lime, test_Lime_class, .init = redirect_all_stdout)
 {
     Lime   lime;
 
@@ -214,38 +195,28 @@ Test(Lime, test_Lime_class, .init = redirect_all_stdout)//, .signal = SIGPIPE, .
         "lime\n");
 }
 
-Test(LittleHand, test_LittleHand_unsorted, .init = redirect_all_stdout)//, .signal = SIGPIPE, .init = redirect_all_stdout)
+Test(LittleHand, test_LittleHand_unsorted, .init = redirect_all_stdout)
 {
     Lime    lime, lime2, lime3, lime4;
     Lemon   lemon, lemon2;
     Banana  banana, banana2;
-    Fruit &f = lime;
 
-    FruitBox    unsorted(15);
+    FruitBox    unsorted(8);
     FruitBox    LimeFruitBox(3);
     FruitBox    LemonFruitBox(3);
     FruitBox    BananaFruitBox(3);
 
-    unsorted.putFruit(&lime);
-    unsorted.putFruit(&lime2);
-    unsorted.putFruit(&lime3);
-    unsorted.putFruit(&lime4);
+    cr_assert(unsorted.putFruit(&lemon) == true);
+    cr_assert(unsorted.putFruit(&lemon2) == true);
+    cr_assert(unsorted.putFruit(&lime) == true);
+    cr_assert(unsorted.putFruit(&lime2) == true);
+    cr_assert(unsorted.putFruit(&lime3) == true);
+    cr_assert(unsorted.putFruit(&lime4) == true);
+    cr_assert(unsorted.putFruit(&banana) == true);
+    cr_assert(unsorted.putFruit(&banana2) == true);
 
-    unsorted.putFruit(&lemon);
-    unsorted.putFruit(&lemon2);
+    LittleHand::sortFruitBox(unsorted, LemonFruitBox, BananaFruitBox, LimeFruitBox);
 
-    unsorted.putFruit(&banana );
-    unsorted.putFruit(&banana2);
-
-    unsorted.putFruit(&f);
-
-
-    unsorted.printList();
-
-    LittleHand  littleHand;
-    littleHand.sortFruitBox(unsorted, LemonFruitBox, BananaFruitBox, LimeFruitBox);
-
-    std::cout << "display List after sort:" << std::endl;
     std::cout << "unsorted list:" << std::endl;
     unsorted.printList();
     std::cout << "LemonFruitBox list:" << std::endl;

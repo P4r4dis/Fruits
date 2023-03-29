@@ -8,11 +8,13 @@
 class                       FruitBox
 {
     public:
-        FruitBox(const int size);
+        FruitBox(int size);
         ~FruitBox(void);
 
         int                 nbFruit(void) const;
         bool                putFruit(Fruit *f);
+                bool                unsortedPutFruit(Fruit *f);
+
         Fruit               *pickFruit(void);
         FruitNode           *head(void) const;
 

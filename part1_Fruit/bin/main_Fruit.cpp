@@ -3,6 +3,7 @@
 #include "../include/Lime.hpp"
 #include "../include/Fruit.hpp"
 #include "../include/FruitBox.hpp"
+#include "../include/LittleHand.hpp"
 
 int main()
 {
@@ -37,5 +38,40 @@ int main()
     std::cout << "new Lime Fruit:" << std::endl;
     std::cout << lime.getVitamins() << std::endl;
     std::cout << lime.getName() << std::endl;
+
+    Lime    lime2, lime3, lime4;
+    Lemon   lemon, lemon2;
+    Banana  banana, banana2;
+
+    FruitBox    unsorted(15);
+    FruitBox    LimeFruitBox(3);
+    FruitBox    LemonFruitBox(3);
+    FruitBox    BananaFruitBox(3);
+
+    unsorted.putFruit(&lime);
+    unsorted.putFruit(&lime2);
+    unsorted.putFruit(&lime3);
+    unsorted.putFruit(&lime4);
+
+    unsorted.putFruit(&lemon);
+    unsorted.putFruit(&lemon2);
+
+    unsorted.putFruit(&banana);
+    unsorted.putFruit(&banana2);
+
+    unsorted.printList();
+
+    LittleHand  littleHand;
+    littleHand.sortFruitBox(unsorted, LemonFruitBox, BananaFruitBox, LimeFruitBox);
+
+    std::cout << "display List after sort:" << std::endl;
+    std::cout << "unsorted list:" << std::endl;
+    unsorted.printList();
+    std::cout << "LemonFruitBox list:" << std::endl;
+    LemonFruitBox.printList();
+    std::cout << "BananaFruitBox list:" << std::endl;
+    BananaFruitBox.printList();
+    std::cout << "LimeFruitBox list:" << std::endl;
+    LimeFruitBox.printList();
     return 0;
 }
