@@ -1,5 +1,6 @@
 #include "../include/FruitBox.hpp"
 
+
 FruitBox::FruitBox(const int size) :    m_size(size),
                                         m_nbFruit(0),
                                         m_head(nullptr)
@@ -7,6 +8,15 @@ FruitBox::FruitBox(const int size) :    m_size(size),
 
 FruitBox::~FruitBox(void)
 {
+    FruitNode* current = m_head;
+    while (current != nullptr) 
+    {
+        FruitNode* next = current->next;
+
+        current = nullptr;
+        delete current;
+        current = next;
+    }
     delete m_head;
 }
 
@@ -39,7 +49,7 @@ bool                    FruitBox::putFruit(Fruit *f)
         return false;
     
     // 2: Create an currentNode becomes head of list
-    FruitNode   *currentFruitNode = m_head; // currently nullptr
+    FruitNode   *currentFruitNode = m_head;
 
     // 3: Check if Fruit is already in the FruitBox, for that:
         // 3.1: traverse the list
@@ -53,7 +63,12 @@ bool                    FruitBox::putFruit(Fruit *f)
     }
     
     // 4: Create a newNode and allocate FruitNode(Fruit)
-    FruitNode   *newFruitNode = new FruitNode(f);
+
+    FruitNode *newFruitNode = nullptr;
+    if (m_nbFruit < m_size)
+        newFruitNode =  new FruitNode(f);
+    else
+        return false;
 
     // 5:   If head FruitBox is empty, set the head to the new FruitNode
     //      Otherwise, append the new FruitNode to the end of the linked list :
@@ -68,6 +83,7 @@ bool                    FruitBox::putFruit(Fruit *f)
         FruitNode   *tailFruitNode = m_head;
         while (tailFruitNode->next != nullptr)
             tailFruitNode = tailFruitNode->next;
+
         tailFruitNode->next = newFruitNode;
     }
     // 7: nb of fruit increment
@@ -75,10 +91,11 @@ bool                    FruitBox::putFruit(Fruit *f)
 
     // 8: return true;
     return true;
+
 }
 
 Fruit                   *FruitBox::pickFruit(void)
-{
+{   
     if (m_nbFruit == 0)
         return nullptr;
     else
@@ -90,7 +107,7 @@ Fruit                   *FruitBox::pickFruit(void)
         Fruit       *fruit = currentFruitNode->fruit;
 
         // Remove the first node from the list
-        m_head = currentFruitNode->next;
+        m_head = m_head->next;
         currentFruitNode = nullptr;
         delete currentFruitNode;
 
@@ -105,13 +122,15 @@ Fruit                   *FruitBox::pickFruit(void)
 void                    FruitBox::printList(void) {
       FruitNode* temp = m_head;
 
-      if(temp != NULL) {
-        std::cout<<"The list contains: " << std::endl;;
-        while(temp != NULL) {
+      if(temp != nullptr) 
+      {
+        std::cout<<"The list contains: " << std::endl;
+        while(temp != nullptr) 
+        {
           std::cout<<temp->fruit->getName()<< std::endl;;
           temp = temp->next;
         }
-      } else {
-        std::cout<<"The list is empty.\n";
       }
-}    
+      else
+        std::cout<<"The list is empty.\n";
+}
