@@ -27,22 +27,30 @@ PART2_SRC_PATH			=	./part2_Fruit/src
 PART2_TST_PATH			=	./part2_Fruit/tests
 PART2_INC_PATH			=	./part2_Fruit/include
 NAME_FRUIT				=	Fruit
-PART2_SRC				=	$(PART1_SRC_PATH)/Fruit.cpp
+PART2_SRC				=	$(PART2_SRC_PATH)/Lemon.cpp \
+							$(PART2_SRC_PATH)/Banana.cpp \
+							$(PART2_SRC_PATH)/Fruit.cpp \
+							$(PART2_SRC_PATH)/FruitBox.cpp \
+							$(PART2_SRC_PATH)/Lime.cpp \
+							$(PART2_SRC_PATH)/LittleHand.cpp \
+							$(PART2_SRC_PATH)/Coconut.cpp
 
-PART2_SRC_TEST			=	$(PART1_TST_PATH)/$(NAME_FRUIT)_test.cpp
+PART2_SRC_TEST			=	$(PART2_TST_PATH)/$(NAME_FRUIT)_test.cpp
 TEST_NAME_FRUIT 		= 	test_$(NAME_FRUIT)
 
 ###############################################
+
+
 BIN_PATH				=	./bin
 
 NAME					=	Fruit
 TEST_NAME 				= 	test_$(NAME)
 
-INCFLAGS				+=	-I $(PART6_INC_PATH)
+INCFLAGS				+=	-I $(PART2_INC_PATH)
 
 CPPFLAGS				+= 	-Wall -Wextra -Werror $(INCFLAGS) -std=c++20
 
-SRCS 					= 	$(PART0_SRC) \
+SRCS 					= 	$(PART2_SRC) \
 							$(BIN_PATH)/main.cpp							
 
 OBJS					=	$(SRCS:.cpp=.o)
@@ -102,4 +110,4 @@ tests_run				:	fclean
 							@$(MAKE) tests_run_part1
 							@$(MAKE) tests_run_part2
 
-.PHONY					: 	all clean fclean re part0 tests_run_part0 part1 tests_run_part1 tests_run
+.PHONY					: 	all clean fclean re part0 tests_run_part0 part1 tests_run_part1 part2 tests_run_part2 tests_run
