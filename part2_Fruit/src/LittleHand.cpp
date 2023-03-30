@@ -1,9 +1,10 @@
 #include "../include/LittleHand.hpp"
 
-void             LittleHand::sortFruitBox(FruitBox &unsorted,
-                                            FruitBox &lemons,
-                                            FruitBox &bananas,
-                                            FruitBox &limes)
+
+void                    LittleHand::sortFruitBox(FruitBox &unsorted,
+                                                FruitBox &lemons,
+                                                FruitBox &bananas,
+                                                FruitBox &limes)
 {
     FruitNode* current = unsorted.head();
     
@@ -33,4 +34,41 @@ void             LittleHand::sortFruitBox(FruitBox &unsorted,
         current = current->next;
     }
     return;
+}
+
+FruitBox * const        *LittleHand::organizeCoconut(Coconut const * const *coconut)
+{
+    int     nbCoconut = 0;
+    int     nbBox = 0;
+    int     coconutByBox = 6;
+
+    // Determine the number of Coconuts needed
+    while (coconut[nbCoconut] != nullptr)
+        ++nbCoconut;
+
+    // Determine the number of FruitBoxes needed
+    nbBox = nbCoconut / coconutByBox;
+    while ((nbBox * coconutByBox) < nbCoconut)
+        ++nbBox;
+
+    // Allocate an array of FruitBoxes
+    FruitBox **cocoBox = new FruitBox*[nbBox + 1];
+    for(int i = 0; i < nbBox; i++)
+        cocoBox[i] = new FruitBox(coconutByBox);
+        
+    // Null-terminate the array
+    cocoBox[nbBox] = nullptr;
+
+    // Fill the FruitBoxes with Coconuts
+    int cocoBoxIndex = 0;
+    for (int i = 0; i < nbCoconut; ++i)
+    {
+        if (!cocoBox[cocoBoxIndex]->putFruit((Coconut *) coconut[i]))
+        {
+            ++cocoBoxIndex;
+            cocoBox[cocoBoxIndex]->putFruit((Coconut *) coconut[i]);
+        }
+    }
+
+    return cocoBox;
 }

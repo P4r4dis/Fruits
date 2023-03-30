@@ -77,7 +77,39 @@ int main()
 
     Coconut     coconut;
     std::cout << "new Coconut Fruit:" << std::endl;
-    std::cout << coconut.getVitamins() << std::endl;
-    std::cout << coconut.getName() << std::endl;
+    std::cout << "Vitamins: " << coconut.getVitamins() << std::endl;
+    std::cout << "Name: " << coconut.getName() << std::endl;
+
+    // Create an array of coconuts
+    Coconut* coconuts[] = {
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), nullptr
+    };
+
+    // Organize the coconuts into fruit boxes
+    FruitBox const* const* coconutBoxes = LittleHand::organizeCoconut(coconuts);
+
+    // Print the contents of the coconut boxes
+    std::cout << "Organized coconut boxes:" << std::endl;
+    for (int i = 0; coconutBoxes[i] != nullptr; i++) {
+        std::cout << "Box " << i+1 << ": " << coconutBoxes[i]->nbFruit() << std::endl;
+    }
+
+    // Clean up memory
+    for (int i = 0; coconuts[i] != nullptr; i++) {
+        delete coconuts[i];
+    }
+    for (int i = 0; coconutBoxes[i] != nullptr; i++) {
+        delete coconutBoxes[i];
+    }
+    delete[] coconutBoxes;
+
     return 0;
 }
