@@ -21,6 +21,7 @@ class                       FruitBox
         int                 getSize(void) const;
 
         void                setHead(FruitNode *f);
+        void                setNbFruit(int nbFruit);
         void                printList(void);
 
 

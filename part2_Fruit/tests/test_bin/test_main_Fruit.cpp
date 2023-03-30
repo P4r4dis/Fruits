@@ -247,3 +247,38 @@ Test(Coconut, test_Coconut_class, .init = redirect_all_stdout)
         "15\n"
         "coconut\n");
 }
+
+Test(Coconut, test_organizeCoconut_class, .init = redirect_all_stdout)
+{
+    Coconut *coconut[] = {
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), new Coconut(), new Coconut(),
+        new Coconut(), nullptr
+    };
+
+    // Organize the coconuts into fruit boxes
+    FruitBox const* const * coconutBoxes = LittleHand::organizeCoconut(coconut);
+
+    // Print the contents of the coconut boxes
+    std::cout << "Organized coconut boxes:" << std::endl;
+    int i = 0;
+    while (i != 4)
+    {
+        std::cout << "Box " << i+1 << ": " << coconutBoxes[i]->nbFruit() << std::endl;
+        cr_assert(coconutBoxes[i]->nbFruit() == 6);
+        i++;
+    }
+   while (coconutBoxes[i] != nullptr)
+    {
+        std::cout << "Box " << i+1 << ": " << coconutBoxes[i]->nbFruit() << std::endl;
+        cr_assert(coconutBoxes[i]->nbFruit() == 1);
+        i++;
+    }
+    cr_assert(coconutBoxes[i] == nullptr);
+}

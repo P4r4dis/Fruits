@@ -29,6 +29,11 @@ void                    FruitBox::setHead(FruitNode *f)
     m_head = f;
 }
 
+void                    FruitBox::setNbFruit(int nbFruit)
+{
+    m_nbFruit = nbFruit;
+}
+
 int                     FruitBox::nbFruit(void) const
 {
     return m_nbFruit;
